@@ -21,9 +21,9 @@
     <header class="bg-gradient-to-r from-emerald-800 via-emerald-700 to-teal-800 text-white shadow-lg sticky top-0 z-30">
         <div class="max-w-5xl mx-auto px-4 py-3 sm:px-6 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <!-- Logo Resmi DMI Telaga Murni -->
+                <!-- Logo Resmi DMI Base64 (Dijamin Tampil) -->
                 <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center p-1 shadow-inner border border-white/20 shrink-0 overflow-hidden">
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEAAQMAAABmvDolAAAABlBMVEUAAAD///+l2Z/dAAAAAXRSTlMAQObYZgAAAFBJREFUeJztwQEBAAAAgiD/r25IQAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC8G9EaAAGzU8WzAAAAAElFTkSuQmCC" alt="Logo DMI" class="w-full h-full object-contain" id="dmiLogoImg" />
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEAAQMAAABmvDolAAAABlBMVEUAAAD///+l2Z/dAAAAAXRSTlMAQObYZgAAAFBJREFUeJztwQEBAAAAgiD/r25IQAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC8G9EaAAGzU8WzAAAAAElFTkSuQmCC" alt="Logo DMI" class="w-full h-full object-contain" />
                 </div>
                 <div>
                     <h1 class="font-bold text-lg sm:text-xl leading-tight">DMI Ranting Telaga Murni</h1>
@@ -33,26 +33,37 @@
                     </p>
                 </div>
             </div>
-            <button onclick="exportToExcel()" class="bg-amber-400 hover:bg-amber-300 text-emerald-950 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold shadow-md transition-all flex items-center gap-2 active:scale-95 border border-amber-300">
-                <i class="fa-solid fa-file-excel text-base"></i>
-                <span class="hidden sm:inline">Download Excel</span>
-            </button>
+            <div class="flex items-center gap-2">
+                <button onclick="exportToExcel()" class="bg-amber-400 hover:bg-amber-300 text-emerald-950 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold shadow-md transition-all flex items-center gap-2 active:scale-95 border border-amber-300">
+                    <i class="fa-solid fa-file-excel text-base"></i>
+                    <span class="hidden sm:inline">Excel</span>
+                </button>
+            </div>
         </div>
     </header>
 
     <main class="max-w-5xl mx-auto px-4 sm:px-6 mt-6 flex-grow w-full space-y-6">
 
-        <!-- Banner Informasi Ringkas -->
-        <div class="bg-emerald-900 text-white rounded-2xl p-5 shadow-xl relative overflow-hidden">
+        <!-- Banner Informasi & Tombol Sinkronisasi Data -->
+        <div class="bg-emerald-900 text-white rounded-2xl p-5 shadow-xl relative overflow-hidden flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div class="absolute -right-10 -bottom-10 opacity-10 text-white text-9xl">🕌</div>
-            <div class="relative z-10">
+            <div class="relative z-10 max-w-xl">
                 <span class="inline-block px-3 py-1 bg-emerald-800/80 border border-emerald-600 rounded-full text-xs text-amber-300 font-semibold mb-2">
                     📌 Program Unggulan DMI
                 </span>
                 <h2 class="text-xl sm:text-2xl font-extrabold mb-1">Formulir Pendataan Masjid & Mushola</h2>
-                <p class="text-xs sm:text-sm text-emerald-100 max-w-2xl leading-relaxed">
-                    Pendataan terpadu sarana tempat ibadah, legalitas wakaf, kondisi akustik/sanitasi, serta kegiatan TPA/TPQ untuk mewujudkan pengelolaan masjid & mushola yang makmur dan ramah jamaah di Desa Telaga Murni.
+                <p class="text-xs sm:text-sm text-emerald-100 leading-relaxed">
+                    Pendataan terpadu sarana tempat ibadah, legalitas wakaf, kondisi akustik/sanitasi, serta kegiatan TPA/TPQ di Desa Telaga Murni.
                 </p>
+            </div>
+            <div class="relative z-10 flex flex-wrap gap-2 shrink-0">
+                <button onclick="backupData()" class="bg-emerald-800 hover:bg-emerald-700 text-white px-3 py-2 rounded-xl text-xs font-bold border border-emerald-600 flex items-center gap-1.5 shadow">
+                    <i class="fa-solid fa-download"></i> Backup Data PC
+                </button>
+                <label class="bg-emerald-800 hover:bg-emerald-700 text-white px-3 py-2 rounded-xl text-xs font-bold border border-emerald-600 flex items-center gap-1.5 shadow cursor-pointer">
+                    <i class="fa-solid fa-upload"></i> Restore ke HP
+                    <input type="file" id="importFile" accept=".json" onchange="restoreData(event)" class="hidden">
+                </label>
             </div>
         </div>
 
@@ -369,6 +380,44 @@
             renderStatsAndList();
         });
 
+        // Fitur Sinkronisasi (Backup dari PC ke file JSON)
+        function backupData() {
+            if (dbData.length === 0) {
+                alert('Belum ada data untuk dibackup!');
+                return;
+            }
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(dbData, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", "backup_dmi_telaga_murni.json");
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        }
+
+        // Fitur Sinkronisasi (Restore ke HP dari file JSON)
+        function restoreData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+                    if (Array.isArray(importedData)) {
+                        dbData = importedData;
+                        localStorage.setItem('dmi_telaga_murni_data', JSON.stringify(dbData));
+                        renderStatsAndList();
+                        alert('Berhasil memuat data ke perangkat ini!');
+                    } else {
+                        alert('Format file backup tidak valid.');
+                    }
+                } catch (err) {
+                    alert('Gagal membaca file JSON.');
+                }
+            };
+            reader.readAsText(file);
+        }
+
         function toggleTPQInput() {
             const status = document.getElementById('statusTPA').value;
             const wrapSantri = document.getElementById('wrapSantri');
@@ -534,7 +583,7 @@
 
             const daftarList = document.getElementById('daftarList');
             if (dbData.length === 0) {
-                daftarList.innerHTML = `<p class="text-xs text-slate-400 col-span-2 text-center py-6">Belum ada data rumah ibadah yang terdaftar. Silakan isi formulir di bawah untuk memulai latihan.</p>`;
+                daftarList.innerHTML = `<p class="text-xs text-slate-400 col-span-2 text-center py-6">Belum ada data rumah ibadah yang terdaftar. Silakan isi formulir di bawah untuk memulai.</p>`;
                 return;
             }
 
