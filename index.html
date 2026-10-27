@@ -1,12 +1,650 @@
-<!-- Header / Banner -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendataan Masjid & Mushola - DMI Ranting Telaga Murni</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- SheetJS CDN untuk Ekspor Excel -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-emerald-50/50 text-slate-800 min-h-screen flex flex-col pb-12">
+
+    <!-- Header / Banner -->
     <header class="bg-gradient-to-r from-emerald-800 via-emerald-700 to-teal-800 text-white shadow-lg sticky top-0 z-30">
         <div class="max-w-5xl mx-auto px-4 py-3 sm:px-6 flex items-center justify-between">
             <div class="flex items-center space-x-3">
                 <!-- Logo Resmi DMI -->
                 <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center p-1 shadow-inner border border-white/20 shrink-0 overflow-hidden">
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAGBElEQVR4nO2azWscZRjHnzPzM52kMUlM7A8bJCVgQasVpIcSjCioJ54UaC2gCHoQQgQ8ePOv6EnxVrwJXsQreCgeBI9uFA9KoaAERUpo04bEJmZ3dmed5+Znd2Z2dpjdO5k3mZ3JzDwv7/M8M8z3fmbmGZ6QeXn9v84D+x9l+1K265T1uFXXbKquN1t9n5A+5q0+j3W8J2YhV9s12r9b9a6T7+fFp6qV/5J6e7lO0V5t/n4j98+W3zR0H89h6tX1X7n69vI9334Z6W6F8X2m+5VfW9D3Xn3Lg+bOqK+5dK6Xbf23K6L7+jB2/qP5e5d0f1V/l9+0bX9N/9Lp9V+z+Jb/n6uX1D7L6J9p+XyP89196bM+nK9uT4vPzP/S63+V7W//qNn2xT1u4x336tP0T73P3TfvB5+9e46939E/vOvdq/z9Luv/v3W//P9u9e13d969O97X8vP9P+Uv9Lp66J7e7c8vNfveV4Pz7j/97+1/1vXf/b33/e72+/b6//n06H2W72e9+4b9N+d7b+7/c/tqZt416w3c4b9M6p/u5/bfv36J9V+T7S9LqL44t8f92jff5//t/X9vN+vL0y+vL6HqX3f5G9ff7P397vX/T8vP/t3X/P3/P39X60/+lZfefZ/pffH3a2e9u98/6z668jP9vvO0//t+/X93uuvVff2s/+ffP/v/o7/f7sP4/v9nffZ/nf9P1p//l2/+z3u9f/d/vP//r6l+7f/N2fv+70s/5//9v99/Xf+r/2f92f9//u99/X+P/f7O1/5u3vff2e8v//u9///f37b9T/+928P+//9v9ff93ff9f//f9X9f39//sH+b/e//+b71vf//H3v//O7375/9Xvvf//N+vev//e71vff//v3//n+L//f7vX//O61u//e7//+f7//f39v////+3//f7vX/f/r//79vvb9X//e71vvf//u9v//e/7//v3u//v3//e79u77v//f6/69vvv//G7v3//u9f9vvb//3u8f/P9v9f//e71vff//u3//f3//v3uv//e7vf//v3u//v3///+3//f7v//v9v//v9uv///u9u//f37//u9v///v3//f7v//v9uu//e7//f3//v9vv//f39v//v9u//v3u//f37//u//v3//v9uu//v3//e7v//v//v9u//f39v///e7v//v//e7v//v//v9u//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//v9u//e7v//v//e7v//v//v9u//f7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//unsplash.com/photo-1590073844006-33379778ae09?auto=format&fit=crop&q=80&w=150" alt="Logo DMI" class="w-full h-full object-contain hidden" />
-                    <!-- Menggunakan logo DMI resmi tanpa terpotong -->
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAGBElEQVR4nO2azWscZRjHnzPzM52kMUlM7A8bJCVgQasVpIcSjCioJ54UaC2gCHoQQgQ8ePOv6EnxVrwJXsQreCgeBI9uFA9KoaAERUpo04bEJmZ3dmed5+Znd2Z2dpjdO5k3mZ3JzDwv7/M8M8z3fmbmGZ6QeXn9v84D+x9l+1K265T1uFXXbKquN1t9n5A+5q0+j3W8J2YhV9s12r9b9a6T7+fFp6qV/5J6e7lO0V5t/n4j98+W3zR0H89h6tX1X7n69vI9334Z6W6F8X2m+5VfW9D3Xn3Lg+bOqK+5dK6Xbf23K6L7+jB2/qP5e5d0f1V/l9+0bX9N/9Lp9V+z+Jb/n6uX1D7L6J9p+XyP89196bM+nK9uT4vPzP/S63+V7W//qNn2xT1u4x336tP0T73P3TfvB5+9e46939E/vOvdq/z9Luv/v3W//P9u9e13d969O97X8vP9P+Uv9Lp66J7e7c8vNfveV4Pz7j/97+1/1vXf/b33/e72+/b6//n06H2W72e9+4b9N+d7b+7/c/tqZt416w3c4b9M6p/u5/bfv36J9V+T7S9LqL44t8f92jff5//t/X9vN+vL0y+vL6HqX3f5G9ff7P397vX/T8vP/t3X/P3/P39X60/+lZfefZ/pffH3a2e9u98/6z668jP9vvO0//t+/X93uuvVff2s/+ffP/v/o7/f7sP4/v9nffZ/nf9P1p//l2/+z3u9f/d/vP//r6l+7f/N2fv+70s/5//9v99/Xf+r/2f92f9//u99/X+P/f7O1/5u3vff2e8v//u9///f37b9T/+928P+//9v9ff93ff9f//f9X9f39//sH+b/e//+b71vf//H3v//O7375/9Xvvf//N+vev//e71vff//v3//n+L//f7vX//O61u//e7//+f7//f39v////+3//f7vX/f/r//79vvb9X//e71vvf//u9v//e/7//v3u//v3//e79u77v//f6/69vvv//G7v3//u9f9vvb//3u8f/P9v9f//e71vff//v3//f3//v3uv//e7vf//v3u//v3///+3//f7v//v9v//v9uv///u9u//f37//u9v///v3//f7v//v9uu//e7//f3//v9vv//f39v//v9u//v3u//f37//u//v3//v9uu//v3//e7v//v//v9u//f39v///e7v//v//e7v//v//v9u//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//unsplash.com/photo-1590073844006-33379778ae09" alt="Logo DMI" class="w-full h-full object-contain" />
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAGBElEQVR4nO2azWscZRjHnzPzM52kMUlM7A8bJCVgQasVpIcSjCioJ54UaC2gCHoQQgQ8ePOv6EnxVrwJXsQreCgeBI9uFA9KoaAERUpo04bEJmZ3dmed5+Znd2Z2dpjdO5k3mZ3JzDwv7/M8M8z3fmbmGZ6QeXn9v84D+x9l+1K265T1uFXXbKquN1t9n5A+5q0+j3W8J2YhV9s12r9b9a6T7+fFp6qV/5J6e7lO0V5t/n4j98+W3zR0H89h6tX1X7n69vI9334Z6W6F8X2m+5VfW9D3Xn3Lg+bOqK+5dK6Xbf23K6L7+jB2/qP5e5d0f1V/l9+0bX9N/9Lp9V+z+Jb/n6uX1D7L6J9p+XyP89196bM+nK9uT4vPzP/S63+V7W//qNn2xT1u4x336tP0T73P3TfvB5+9e46939E/vOvdq/z9Luv/v3W//P9u9e13d969O97X8vP9P+Uv9Lp66J7e7c8vNfveV4Pz7j/97+1/1vXf/b33/e72+/b6//n06H2W72e9+4b9N+d7b+7/c/tqZt416w3c4b9M6p/u5/bfv36J9V+T7S9LqL44t8f92jff5//t/X9vN+vL0y+vL6HqX3f5G9ff7P397vX/T8vP/t3X/P3/P39X60/+lZfefZ/pffH3a2e9u98/6z668jP9vvO0//t+/X93uuvVff2s/+ffP/v/o7/f7sP4/v9nffZ/nf9P1p//l2/+z3u9f/d/vP//r6l+7f/N2fv+70s/5//9v99/Xf+r/2f92f9//u99/X+P/f7O1/5u3vff2e8v//u9///f37b9T/+928P+//9v9ff93ff9f//f9X9f39//sH+b/e//+b71vf//H3v//O7375/9Xvvf//N+vev//e71vff//v3//n+L//f7vX//O61u//e7//+f7//f39v////+3//f7vX/f/r//79vvb9X//e71vvf//u9v//e/7//v3u//v3//e79u77v//f6/69vvv//G7v3//u9f9vvb//3u8f/P9v9f//e71vff//v3//f3//v3uv//e7vf//v3u//v3///+3//f7v//v9v//v9uv///u9u//f37//u9v///v3//f7v//v9uu//e7//f3//v9vv//f39v//v9u//v3u//f37//u//v3//v9uu//v3//e7v//v//v9u//f39v///e7v//v//e7v//v//v9u//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//base64:iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAGBElEQVR4nO2azWscZRjHnzPzM52kMUlM7A8bJCVgQasVpIcSjCioJ54UaC2gCHoQQgQ8ePOv6EnxVrwJXsQreCgeBI9uFA9KoaAERUpo04bEJmZ3dmed5+Znd2Z2dpjdO5k3mZ3JzDwv7/M8M8z3fmbmGZ6QeXn9v84D+x9l+1K265T1uFXXbKquN1t9n5A+5q0+j3W8J2YhV9s12r9b9a6T7+fFp6qV/5J6e7lO0V5t/n4j98+W3zR0H89h6tX1X7n69vI9334Z6W6F8X2m+5VfW9D3Xn3Lg+bOqK+5dK6Xbf23K6L7+jB2/qP5e5d0f1V/l9+0bX9N/9Lp9V+z+Jb/n6uX1D7L6J9p+XyP89196bM+nK9uT4vPzP/S63+V7W//qNn2xT1u4x336tP0T73P3TfvB5+9e46939E/vOvdq/z9Luv/v3W//P9u9e13d969O97X8vP9P+Uv9Lp66J7e7c8vNfveV4Pz7j/97+1/1vXf/b33/e72+/b6//n06H2W72e9+4b9N+d7b+7/c/tqZt416w3c4b9M6p/u5/bfv36J9V+T7S9LqL44t8f92jff5//t/X9vN+vL0y+vL6HqX3f5G9ff7P397vX/T8vP/t3X/P3/P39X60/+lZfefZ/pffH3a2e9u98/6z668jP9vvO0//t+/X93uuvVff2s/+ffP/v/o7/f7sP4/v9nffZ/nf9P1p//l2/+z3u9f/d/vP//r6l+7f/N2fv+70s/5//9v99/Xf+r/2f92f9//u99/X+P/f7O1/5u3vff2e8v//u9///f37b9T/+928P+//9v9ff93ff9f//f9X9f39//sH+b/e//+b71vf//H3v//O7375/9Xvvf//N+vev//e71vff//v3//n+L//f7vX//O61u//e7//+f7//f39v////+3//f7vX/f/r//79vvb9X//e71vvf//u9v//e/7//v3u//v3//e79u77v//f6/69vvv//G7v3//u9f9vvb//3u8f/P9v9f//e71vff//v3//f3//v3uv//e7vf//v3u//v3///+3//f7v//v9v//v9uv///u9u//f37//u9v///v3//f7v//v9uu//e7//f3//v9vv//f39v//v9u//v3u//f37//u//v3//v9uu//v3//e7v//v//v9u//f39v///e7v//v//e7v//v//v9u//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7v//v//e7up//w==" alt="Logo DMI" class="w-full h-full object-contain" />
                 </div>
                 <div>
-...
+                    <h1 class="font-bold text-lg sm:text-xl leading-tight">DMI Ranting Telaga Murni</h1>
+                    <p class="text-xs text-emerald-100 flex items-center gap-1.5">
+                        <span class="inline-block w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                        Sistem Inventarisasi & Pendataan Rumah Ibadah
+                    </p>
+                </div>
+            </div>
+            <button onclick="exportToExcel()" class="bg-amber-400 hover:bg-amber-300 text-emerald-950 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold shadow-md transition-all flex items-center gap-2 active:scale-95 border border-amber-300">
+                <i class="fa-solid fa-file-excel text-base"></i>
+                <span class="hidden sm:inline">Download Excel</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 mt-6 flex-grow w-full space-y-6">
+
+        <!-- Banner Informasi Ringkas -->
+        <div class="bg-emerald-900 text-white rounded-2xl p-5 shadow-xl relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 opacity-10 text-white text-9xl">🕌</div>
+            <div class="relative z-10">
+                <span class="inline-block px-3 py-1 bg-emerald-800/80 border border-emerald-600 rounded-full text-xs text-amber-300 font-semibold mb-2">
+                    📌 Program Unggulan DMI
+                </span>
+                <h2 class="text-xl sm:text-2xl font-extrabold mb-1">Formulir Pendataan Masjid & Mushola</h2>
+                <p class="text-xs sm:text-sm text-emerald-100 max-w-2xl leading-relaxed">
+                    Pendataan terpadu sarana tempat ibadah, legalitas wakaf, kondisi akustik/sanitasi, serta kegiatan TPA/TPQ untuk mewujudkan pengelolaan masjid & mushola yang makmur dan ramah jamaah di Desa Telaga Murni.
+                </p>
+            </div>
+        </div>
+
+        <!-- Stat Cards Ringkasan -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+            <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-emerald-200 flex items-center justify-between h-24">
+                <div>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Masjid</p>
+                    <p id="statMasjid" class="text-2xl sm:text-3xl font-extrabold text-emerald-900 mt-1">0</p>
+                </div>
+                <div class="w-11 h-11 bg-emerald-100/70 text-emerald-800 rounded-xl flex items-center justify-center text-xl shrink-0">🕋</div>
+            </div>
+            <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-emerald-200 flex items-center justify-between h-24">
+                <div>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Mushola</p>
+                    <p id="statMushola" class="text-2xl sm:text-3xl font-extrabold text-emerald-900 mt-1">0</p>
+                </div>
+                <div class="w-11 h-11 bg-emerald-100/70 text-emerald-800 rounded-xl flex items-center justify-center text-xl shrink-0">🕌</div>
+            </div>
+            <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-emerald-200 flex items-center justify-between h-24">
+                <div>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">TPQ / TPA</p>
+                    <p id="statTPQ" class="text-xl sm:text-2xl font-extrabold text-emerald-900 mt-1">0</p>
+                </div>
+                <div class="w-11 h-11 bg-emerald-100/70 text-emerald-800 rounded-xl flex items-center justify-center text-xl shrink-0">📖</div>
+            </div>
+            <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-emerald-200 flex items-center justify-between h-24">
+                <div>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Santri</p>
+                    <p id="statSantri" class="text-xl sm:text-2xl font-extrabold text-emerald-900 mt-1">0</p>
+                </div>
+                <div class="w-11 h-11 bg-emerald-100/70 text-emerald-800 rounded-xl flex items-center justify-center text-xl shrink-0">👨‍👩‍👧‍👦</div>
+            </div>
+        </div>
+
+        <!-- Card Daftar Terdaftar -->
+        <div class="bg-white rounded-2xl shadow-sm border border-emerald-200/80 p-5">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                    <h3 class="font-bold text-slate-800 text-base sm:text-lg">Daftar Rumah Ibadah</h3>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span id="totalBadge" class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full">0 Terdaftar</span>
+                    <button onclick="openAllListModal()" class="bg-emerald-700 hover:bg-emerald-800 text-white px-3 py-1.5 rounded-xl text-xs font-bold transition-all shadow-sm flex items-center gap-1.5">
+                        <i class="fa-solid fa-list-ul"></i> Lihat Semua Data
+                    </button>
+                </div>
+            </div>
+            <div id="daftarList" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+        </div>
+
+        <!-- Form Card Multi-Step -->
+        <div class="bg-white rounded-2xl shadow-md border border-emerald-100 overflow-hidden">
+            <div class="bg-slate-100 h-2 w-full">
+                <div id="progressBar" class="bg-emerald-600 h-full w-1/4 transition-all duration-300"></div>
+            </div>
+
+            <div class="p-5 sm:p-6 bg-emerald-50/40 border-b border-emerald-100 flex items-center justify-between">
+                <div>
+                    <span id="stepBadge" class="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full">Langkah 1 dari 4</span>
+                    <h3 id="stepTitle" class="text-lg font-bold text-slate-800 mt-1">Bagian A: Identitas & Lokasi Rumah Ibadah</h3>
+                </div>
+                <div class="text-emerald-700 font-bold text-sm" id="stepCounter">25%</div>
+            </div>
+
+            <form id="dmiForm" onsubmit="event.preventDefault(); openReviewModal();" class="p-5 sm:p-8">
+                <!-- LANGKAH 1 -->
+                <div id="step1" class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Nama Petugas / Pengisi <span class="text-rose-500">*</span></label>
+                            <input type="text" id="petugas" required placeholder="Contoh: Ahmad Subagja" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-500 text-sm outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">No. WA Petugas <span class="text-rose-500">*</span></label>
+                            <input type="tel" id="waPetugas" required placeholder="08123456789" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-500 text-sm outline-none">
+                        </div>
+                    </div>
+                    <hr class="border-slate-100 my-2">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="sm:col-span-2">
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Nama Masjid / Mushola <span class="text-rose-500">*</span></label>
+                            <input type="text" id="namaMasjid" required placeholder="Contoh: Masjid Jami' Al-Hidayah" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-500 text-sm outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Jenis Rumah Ibadah <span class="text-rose-500">*</span></label>
+                            <select id="jenisIbadah" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-500 text-sm outline-none bg-white">
+                                <option value="Masjid">Masjid</option>
+                                <option value="Mushola">Mushola</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Alamat Lengkap & RT/RW <span class="text-rose-500">*</span></label>
+                            <input type="text" id="alamat" required placeholder="Jl. Telaga Harapan RT 03/08" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-500 text-sm outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Tahun Berdiri (Perkiraan)</label>
+                            <input type="number" id="tahunBerdiri" placeholder="Contoh: 1998" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-500 text-sm outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Titik Koordinat / Link Google Maps</label>
+                        <input type="text" id="koordinat" placeholder="https://maps.google.com/?q=..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-500 text-sm outline-none">
+                    </div>
+                </div>
+
+                <!-- LANGKAH 2 -->
+                <div id="step2" class="space-y-4 hidden">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Status Tanah / Wakaf <span class="text-rose-500">*</span></label>
+                            <select id="statusTanah" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm outline-none bg-white">
+                                <option value="Wakaf Bersertifikat">Wakaf (Sudah Sertifikat BPN)</option>
+                                <option value="Wakaf Belum Sertifikat">Wakaf (Belum Sertifikat / Akta AIW)</option>
+                                <option value="Hibah / Fasos">Hibah / Fasos-Fasum Desa</option>
+                                <option value="Milik Pribadi">Hak Milik Pribadi / Kaum</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">No. Sertifikat / Akta Wakaf</label>
+                            <input type="text" id="noSertifikat" placeholder="Isi jika ada" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm outline-none">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Luas Tanah (m²)</label>
+                            <input type="number" id="luasTanah" placeholder="300" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Luas Bangunan (m²)</label>
+                            <input type="number" id="luasBangunan" placeholder="200" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm outline-none">
+                        </div>
+                    </div>
+                    <hr class="border-slate-100 my-2">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Nama Ketua DKM <span class="text-rose-500">*</span></label>
+                            <input type="text" id="ketuaDKM" required placeholder="H. Ust. Kurniawan" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">No. WA Ketua DKM <span class="text-rose-500">*</span></label>
+                            <input type="tel" id="waDKM" required placeholder="0812..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Jumlah Pengurus DKM</label>
+                            <input type="number" id="jumlahPengurus" placeholder="12" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Keberadaan Remaja Masjid (IRMAS)</label>
+                        <select id="statusIRMAS" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm outline-none bg-white">
+                            <option value="Ada & Aktif">Ada & Aktif</option>
+                            <option value="Ada (Vakum)">Ada (Vakum/Kurang Aktif)</option>
+                            <option value="Belum Ada">Belum Ada</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- LANGKAH 3 -->
+                <div id="step3" class="space-y-4 hidden">
+                    <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-200 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h4 class="font-bold text-emerald-900 text-sm">📖 Taman Pendidikan Al-Qur'an (TPA / TPQ)</h4>
+                            <span class="text-xs bg-emerald-200 text-emerald-800 font-bold px-2 py-0.5 rounded">Fasilitas Pendidikan</span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Keberadaan TPA/TPQ</label>
+                                <select id="statusTPA" onchange="toggleTPQInput()" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm bg-white">
+                                    <option value="Ada (Aktif)">Ada (Aktif)</option>
+                                    <option value="Ada (Vakum)">Ada (Vakum)</option>
+                                    <option value="Tidak Ada">Tidak Ada</option>
+                                </select>
+                            </div>
+                            <div id="wrapSantri">
+                                <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Jumlah Murid / Santri</label>
+                                <input type="number" id="jumlahSantri" placeholder="0" value="0" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm">
+                            </div>
+                            <div id="wrapGuru">
+                                <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Jumlah Guru / Pengajar</label>
+                                <input type="number" id="jumlahGuru" placeholder="0" value="0" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Kapasitas Jamaah (Orang)</label>
+                            <input type="number" id="kapasitas" placeholder="300" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Kondisi Sound System</label>
+                            <select id="kondisiSound" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm outline-none bg-white">
+                                <option value="Sangat Baik & Jernih">Sangat Baik & Jernih</option>
+                                <option value="Perlu Perbaikan / Akustik DMI">Perlu Perbaikan / Akustik DMI</option>
+                                <option value="Rusak / Tidak Layak">Rusak / Tidak Layak</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Kebersihan Toilet & Wudu</label>
+                            <select id="kondisiSanitasi" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm outline-none bg-white">
+                                <option value="Bersih & Sangat Layak">Bersih & Sangat Layak</option>
+                                <option value="Cukup Baik">Cukup Baik</option>
+                                <option value="Butuh Renovasi Air/Sanitasi">Butuh Renovasi Air/Sanitasi</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Bantuan / Program DMI yang Paling Diharapkan</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-medium text-slate-700">
+                            <label class="flex items-center gap-2 p-2 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
+                                <input type="checkbox" name="programRequired" value="Akustik Sound System" class="rounded text-emerald-600 focus:ring-emerald-500">
+                                <span>Perbaikan Akustik Sound System</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-2 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
+                                <input type="checkbox" name="programRequired" value="Sertifikasi Wakaf Tanah" class="rounded text-emerald-600 focus:ring-emerald-500">
+                                <span>Sertifikasi Tanah Wakaf</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-2 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
+                                <input type="checkbox" name="programRequired" value="Pembinaan Remaja Masjid" class="rounded text-emerald-600 focus:ring-emerald-500">
+                                <span>Pembinaan IRMAS / Pemuda</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-2 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
+                                <input type="checkbox" name="programRequired" value="Koperasi & Pemberdayaan Umat" class="rounded text-emerald-600 focus:ring-emerald-500">
+                                <span>Pemberdayaan Ekonomi / Koperasi</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LANGKAH 4 -->
+                <div id="step4" class="space-y-4 hidden">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Catatan Khusus / Aspirasi DKM</label>
+                        <textarea id="catatan" rows="3" placeholder="Tuliskan kendala khusus atau permohonan ke DMI Ranting..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm outline-none"></textarea>
+                    </div>
+                    <div class="p-4 bg-amber-50 border border-amber-200 rounded-2xl text-xs text-amber-800 space-y-1">
+                        <p class="font-bold">⚠️ Periksa Kembali Data Sebelum Mengirim:</p>
+                        <p>Pastikan nama masjid/mushola, no HP DKM, dan status keberadaan TPA/TPQ telah terisi dengan benar agar program DMI tepat sasaran.</p>
+                    </div>
+                </div>
+
+                <!-- Navigasi Tombol Form -->
+                <div class="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between">
+                    <button type="button" id="btnPrev" onclick="changeStep(-1)" class="hidden px-5 py-2.5 rounded-xl border border-slate-300 text-slate-600 font-bold text-xs hover:bg-slate-50 active:scale-95 transition-all">← Kembali</button>
+                    <div class="ml-auto flex items-center gap-2">
+                        <button type="button" id="btnNext" onclick="changeStep(1)" class="bg-emerald-700 hover:bg-emerald-800 text-white px-6 py-2.5 rounded-xl font-bold text-xs shadow-md active:scale-95 transition-all">Lanjut →</button>
+                        <button type="submit" id="btnSubmit" class="hidden bg-amber-500 hover:bg-amber-400 text-emerald-950 px-6 py-2.5 rounded-xl font-extrabold text-xs shadow-md active:scale-95 transition-all border border-amber-300">Simpan & Kirim Data 🚀</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Modal Review, Success, Detail, dll -->
+    <div id="reviewModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] flex flex-col overflow-hidden">
+            <div class="p-4 bg-emerald-800 text-white flex items-center justify-between">
+                <h3 class="font-bold text-base flex items-center gap-2">📋 Konfirmasi Ringkasan Data</h3>
+                <button onclick="closeReviewModal()" class="text-emerald-200 hover:text-white font-bold text-xl">&times;</button>
+            </div>
+            <div id="reviewContent" class="p-5 overflow-y-auto space-y-3 text-xs text-slate-700"></div>
+            <div class="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-end gap-2">
+                <button onclick="closeReviewModal()" class="px-4 py-2 rounded-xl border border-slate-300 font-bold text-xs text-slate-600">Batal / Edit</button>
+                <button onclick="confirmSubmit()" class="px-5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs shadow">Ya, Simpan Data</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="successModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 text-center space-y-4">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center text-3xl mx-auto shadow-inner">✨</div>
+            <h3 class="font-extrabold text-xl text-slate-800">Jazakallahu Khairan!</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">Data rumah ibadah telah berhasil terdaftar dalam sistem DMI Ranting Desa Telaga Murni. Terima kasih atas partisipasi aktif Anda.</p>
+            <button onclick="closeSuccessModal()" class="w-full py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs rounded-xl shadow-md">Tutup & Tambah Data Lagi</button>
+        </div>
+    </div>
+
+    <div id="previewDetailModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] flex flex-col overflow-hidden">
+            <div class="p-4 bg-emerald-900 text-white flex items-center justify-between">
+                <h3 class="font-bold text-base flex items-center gap-2">🔎 Detail Data Terdaftar</h3>
+                <button onclick="closePreviewDetailModal()" class="text-emerald-200 hover:text-white font-bold text-xl">&times;</button>
+            </div>
+            <div id="previewDetailContent" class="p-5 overflow-y-auto space-y-3 text-xs text-slate-700"></div>
+            <div class="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-end">
+                <button onclick="closePreviewDetailModal()" class="px-5 py-2 rounded-xl bg-slate-700 text-white font-bold text-xs">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="allListModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden">
+            <div class="p-4 bg-emerald-800 text-white flex items-center justify-between">
+                <h3 class="font-bold text-base flex items-center gap-2">📋 Seluruh Rumah Ibadah Terdaftar di Telaga Murni</h3>
+                <button onclick="closeAllListModal()" class="text-emerald-200 hover:text-white font-bold text-xl">&times;</button>
+            </div>
+            <div id="allListContent" class="p-5 overflow-y-auto space-y-3 text-xs text-slate-700 divide-y divide-slate-100"></div>
+            <div class="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
+                <span id="modalTotalCount" class="text-xs font-semibold text-slate-500">Total: 0 Data</span>
+                <button onclick="closeAllListModal()" class="px-5 py-2 rounded-xl bg-slate-700 text-white font-bold text-xs">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+        let dbData = JSON.parse(localStorage.getItem('dmi_telaga_murni_data')) || [];
+        let currentStep = 1;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderStatsAndList();
+        });
+
+        function toggleTPQInput() {
+            const status = document.getElementById('statusTPA').value;
+            const wrapSantri = document.getElementById('wrapSantri');
+            const wrapGuru = document.getElementById('wrapGuru');
+            if (status === 'Tidak Ada') {
+                wrapSantri.classList.add('opacity-40', 'pointer-events-none');
+                wrapGuru.classList.add('opacity-40', 'pointer-events-none');
+                document.getElementById('jumlahSantri').value = 0;
+                document.getElementById('jumlahGuru').value = 0;
+            } else {
+                wrapSantri.classList.remove('opacity-40', 'pointer-events-none');
+                wrapGuru.classList.remove('opacity-40', 'pointer-events-none');
+            }
+        }
+
+        function changeStep(direction) {
+            if (direction === 1) {
+                if (currentStep === 1) {
+                    const p = document.getElementById('petugas').value;
+                    const wp = document.getElementById('waPetugas').value;
+                    const nm = document.getElementById('namaMasjid').value;
+                    const al = document.getElementById('alamat').value;
+                    if (!p || !wp || !nm || !al) {
+                        alert('Mohon lengkapi data wajib pada Langkah 1!');
+                        return;
+                    }
+                } else if (currentStep === 2) {
+                    const st = document.getElementById('statusTanah').value;
+                    const kd = document.getElementById('ketuaDKM').value;
+                    const wkd = document.getElementById('waDKM').value;
+                    if (!st || !kd || !wkd) {
+                        alert('Mohon lengkapi data wajib pada Langkah 2!');
+                        return;
+                    }
+                }
+            }
+            currentStep += direction;
+            if (currentStep < 1) currentStep = 1;
+            if (currentStep > 4) currentStep = 4;
+            updateStepView();
+        }
+
+        function updateStepView() {
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById(`step${i}`).classList.add('hidden');
+            }
+            document.getElementById(`step${currentStep}`).classList.remove('hidden');
+
+            const titles = [
+                "Bagian A: Identitas & Lokasi Rumah Ibadah",
+                "Bagian B: Legalitas Tanah & Kepengurusan DKM",
+                "Bagian C: Fasilitas, TPA/TPQ & Kondisi Teknis",
+                "Bagian D: Catatan Khusus & Aspirasi DKM"
+            ];
+            document.getElementById('stepTitle').innerText = titles[currentStep - 1];
+            document.getElementById('stepBadge').innerText = `Langkah ${currentStep} dari 4`;
+            
+            const percents = ["25%", "50%", "75%", "100%"];
+            document.getElementById('stepCounter').innerText = percents[currentStep - 1];
+            document.getElementById('progressBar').style.width = percents[currentStep - 1];
+
+            const btnPrev = document.getElementById('btnPrev');
+            const btnNext = document.getElementById('btnNext');
+            const btnSubmit = document.getElementById('btnSubmit');
+
+            if (currentStep === 1) {
+                btnPrev.classList.add('hidden');
+            } else {
+                btnPrev.classList.remove('hidden');
+            }
+
+            if (currentStep === 4) {
+                btnNext.classList.add('hidden');
+                btnSubmit.classList.remove('hidden');
+            } else {
+                btnNext.classList.remove('hidden');
+                btnSubmit.classList.add('hidden');
+            }
+            window.scrollTo({ top: 400, behavior: 'smooth' });
+        }
+
+        function openReviewModal() {
+            const content = document.getElementById('reviewContent');
+            const programs = Array.from(document.querySelectorAll('input[name="programRequired"]:checked')).map(cb => cb.value).join(', ') || '-';
+            
+            content.innerHTML = `
+                <div class="bg-emerald-50 p-3 rounded-xl space-y-1.5 border border-emerald-100">
+                    <p><b>Pengisi:</b> ${document.getElementById('petugas').value} (${document.getElementById('waPetugas').value})</p>
+                    <p><b>Rumah Ibadah:</b> ${document.getElementById('namaMasjid').value} (${document.getElementById('jenisIbadah').value})</p>
+                    <p><b>Alamat:</b> ${document.getElementById('alamat').value}</p>
+                </div>
+                <div class="bg-slate-50 p-3 rounded-xl space-y-1.5 border border-slate-100">
+                    <p><b>Status Tanah:</b> ${document.getElementById('statusTanah').value}</p>
+                    <p><b>Ketua DKM:</b> ${document.getElementById('ketuaDKM').value} (${document.getElementById('waDKM').value})</p>
+                    <p><b>Status TPA/TPQ:</b> ${document.getElementById('statusTPA').value} (${document.getElementById('jumlahSantri').value} Santri, ${document.getElementById('jumlahGuru').value} Guru)</p>
+                    <p><b>Kondisi Sound:</b> ${document.getElementById('kondisiSound').value}</p>
+                    <p><b>Program Diharapkan:</b> ${programs}</p>
+                </div>
+            `;
+            document.getElementById('reviewModal').classList.remove('hidden');
+        }
+
+        function closeReviewModal() {
+            document.getElementById('reviewModal').classList.add('hidden');
+        }
+
+        function confirmSubmit() {
+            const programs = Array.from(document.querySelectorAll('input[name="programRequired"]:checked')).map(cb => cb.value);
+            const newData = {
+                id: Date.now(),
+                petugas: document.getElementById('petugas').value,
+                waPetugas: document.getElementById('waPetugas').value,
+                namaMasjid: document.getElementById('namaMasjid').value,
+                jenisIbadah: document.getElementById('jenisIbadah').value,
+                alamat: document.getElementById('alamat').value,
+                tahunBerdiri: document.getElementById('tahunBerdiri').value || '-',
+                koordinat: document.getElementById('koordinat').value || '-',
+                statusTanah: document.getElementById('statusTanah').value,
+                noSertifikat: document.getElementById('noSertifikat').value || '-',
+                luasTanah: Number(document.getElementById('luasTanah').value) || 0,
+                luasBangunan: Number(document.getElementById('luasBangunan').value) || 0,
+                ketuaDKM: document.getElementById('ketuaDKM').value,
+                waDKM: document.getElementById('waDKM').value,
+                jumlahPengurus: Number(document.getElementById('jumlahPengurus').value) || 0,
+                statusIRMAS: document.getElementById('statusIRMAS').value,
+                statusTPA: document.getElementById('statusTPA').value,
+                jumlahSantri: Number(document.getElementById('jumlahSantri').value) || 0,
+                jumlahGuru: Number(document.getElementById('jumlahGuru').value) || 0,
+                kapasitas: Number(document.getElementById('kapasitas').value) || 0,
+                kondisiSound: document.getElementById('kondisiSound').value,
+                kondisiSanitasi: document.getElementById('kondisiSanitasi').value,
+                programRequired: programs,
+                catatan: document.getElementById('catatan').value || '-',
+                tanggal: new Date().toISOString().split('T')[0]
+            };
+
+            dbData.unshift(newData);
+            localStorage.setItem('dmi_telaga_murni_data', JSON.stringify(dbData));
+
+            closeReviewModal();
+            document.getElementById('dmiForm').reset();
+            currentStep = 1;
+            updateStepView();
+            renderStatsAndList();
+            document.getElementById('successModal').classList.remove('hidden');
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.add('hidden');
+        }
+
+        function renderStatsAndList() {
+            const totalMasjid = dbData.filter(item => item.jenisIbadah === 'Masjid').length;
+            const totalMushola = dbData.filter(item => item.jenisIbadah === 'Mushola').length;
+            const totalTPQ = dbData.filter(item => item.statusTPA && item.statusTPA.includes('Aktif')).length;
+            const totalSantri = dbData.reduce((acc, item) => acc + (Number(item.jumlahSantri) || 0), 0);
+
+            document.getElementById('statMasjid').innerText = totalMasjid;
+            document.getElementById('statMushola').innerText = totalMushola;
+            document.getElementById('statTPQ').innerText = totalTPQ;
+            document.getElementById('statSantri').innerText = totalSantri;
+            document.getElementById('totalBadge').innerText = `${dbData.length} Terdaftar`;
+
+            const daftarList = document.getElementById('daftarList');
+            if (dbData.length === 0) {
+                daftarList.innerHTML = `<p class="text-xs text-slate-400 col-span-2 text-center py-6">Belum ada data rumah ibadah yang terdaftar. Silakan isi formulir di bawah untuk memulai latihan.</p>`;
+                return;
+            }
+
+            const latestData = dbData.slice(0, 4);
+            daftarList.innerHTML = latestData.map(item => `
+                <div class="p-3.5 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-white transition-all flex items-center justify-between gap-3">
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2 py-0.5 rounded text-[10px] font-bold ${item.jenisIbadah === 'Masjid' ? 'bg-emerald-100 text-emerald-800' : 'bg-teal-100 text-teal-800'}">${item.jenisIbadah}</span>
+                            <h4 class="font-bold text-slate-800 text-xs sm:text-sm">${item.namaMasjid}</h4>
+                        </div>
+                        <p class="text-[11px] text-slate-500 truncate max-w-[220px] sm:max-w-xs"><i class="fa-solid fa-location-dot text-emerald-600 mr-1"></i>${item.alamat}</p>
+                    </div>
+                    <button onclick="openDetail(${item.id})" class="px-3 py-1.5 bg-emerald-100 hover:bg-emerald-200 text-emerald-800 font-bold text-xs rounded-lg transition-all shrink-0">Detail</button>
+                </div>
+            `).join('');
+        }
+
+        function openDetail(id) {
+            const item = dbData.find(d => d.id === id);
+            if (!item) return;
+
+            const content = document.getElementById('previewDetailContent');
+            content.innerHTML = `
+                <div class="bg-emerald-50 p-3.5 rounded-xl space-y-1.5 border border-emerald-100">
+                    <h4 class="font-bold text-emerald-900 text-sm">${item.namaMasjid} (${item.jenisIbadah})</h4>
+                    <p><b>Alamat:</b> ${item.alamat}</p>
+                    <p><b>Tahun Berdiri:</b> ${item.tahunBerdiri}</p>
+                </div>
+                <div class="space-y-1.5 bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                    <p><b>Ketua DKM:</b> ${item.ketuaDKM} (WA: ${item.waDKM})</p>
+                    <p><b>Status Tanah:</b> ${item.statusTanah} ${item.noSertifikat !== '-' ? '(No: ' + item.noSertifikat + ')' : ''}</p>
+                    <p><b>Luas Tanah/Bng:</b> ${item.luasTanah} m² / ${item.luasBangunan} m²</p>
+                    <p><b>Kapasitas Jamaah:</b> ${item.kapasitas} Orang</p>
+                    <p><b>Status TPA/TPQ:</b> ${item.statusTPA} (${item.jumlahSantri} Santri, ${item.jumlahGuru} Pengajar)</p>
+                    <p><b>Kondisi Sound:</b> ${item.kondisiSound}</p>
+                    <p><b>Kebersihan Toilet:</b> ${item.kondisiSanitasi}</p>
+                    <p><b>IRMAS:</b> ${item.statusIRMAS}</p>
+                    <p><b>Program Diharapkan:</b> ${Array.isArray(item.programRequired) ? item.programRequired.join(', ') : '-'}</p>
+                    <p><b>Catatan DKM:</b> ${item.catatan}</p>
+                </div>
+            `;
+            document.getElementById('previewDetailModal').classList.remove('hidden');
+        }
+
+        function closePreviewDetailModal() {
+            document.getElementById('previewDetailModal').classList.add('hidden');
+        }
+
+        function openAllListModal() {
+            const content = document.getElementById('allListContent');
+            document.getElementById('modalTotalCount').innerText = `Total: ${dbData.length} Data Terdaftar`;
+
+            if (dbData.length === 0) {
+                content.innerHTML = `<p class="text-xs text-slate-400 text-center py-6">Belum ada data rumah ibadah yang terdaftar.</p>`;
+            } else {
+                content.innerHTML = dbData.map((item, index) => `
+                    <div class="py-3 flex items-center justify-between gap-3">
+                        <div>
+                            <p class="font-bold text-slate-800 text-xs sm:text-sm">${index + 1}. ${item.namaMasjid} <span class="text-[10px] px-2 py-0.5 rounded font-bold ${item.jenisIbadah === 'Masjid' ? 'bg-emerald-100 text-emerald-800' : 'bg-teal-100 text-teal-800'}">${item.jenisIbadah}</span></p>
+                            <p class="text-[11px] text-slate-500">${item.alamat} — DKM: ${item.ketuaDKM}</p>
+                        </div>
+                        <button onclick="closeAllListModal(); openDetail(${item.id});" class="px-3 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs rounded-lg transition-all shrink-0">Lihat Detail</button>
+                    </div>
+                `).join('');
+            }
+            document.getElementById('allListModal').classList.remove('hidden');
+        }
+
+        function closeAllListModal() {
+            document.getElementById('allListModal').classList.add('hidden');
+        }
+
+        function exportToExcel() {
+            if (dbData.length === 0) {
+                alert('Belum ada data untuk diekspor!');
+                return;
+            }
+            const formattedData = dbData.map((item, index) => ({
+                "No": index + 1,
+                "Tanggal Input": item.tanggal,
+                "Nama Petugas": item.petugas,
+                "WA Petugas": item.waPetugas,
+                "Nama Rumah Ibadah": item.namaMasjid,
+                "Jenis": item.jenisIbadah,
+                "Alamat Lengkap": item.alamat,
+                "Tahun Berdiri": item.tahunBerdiri,
+                "Google Maps": item.koordinat,
+                "Status Tanah": item.statusTanah,
+                "No Sertifikat": item.noSertifikat,
+                "Luas Tanah (m2)": item.luasTanah,
+                "Luas Bangunan (m2)": item.luasBangunan,
+                "Ketua DKM": item.ketuaDKM,
+                "WA DKM": item.waDKM,
+                "Jumlah Pengurus": item.jumlahPengurus,
+                "Status IRMAS": item.statusIRMAS,
+                "Status TPA/TPQ": item.statusTPA,
+                "Jumlah Santri": item.jumlahSantri,
+                "Jumlah Guru TPA": item.jumlahGuru,
+                "Kapasitas Jamaah": item.kapasitas,
+                "Kondisi Sound": item.kondisiSound,
+                "Sanitasi Toilet": item.kondisiSanitasi,
+                "Bantuan DMI Diharapkan": Array.isArray(item.programRequired) ? item.programRequired.join(', ') : '-',
+                "Catatan / Aspirasi": item.catatan
+            }));
+            const worksheet = XLSX.utils.json_to_sheet(formattedData);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Data DMI Telaga Murni");
+            XLSX.writeFile(workbook, "Data_Pendataan_DMI_Telaga_Murni.xlsx");
+        }
+    </script>
+</body>
+</html>
