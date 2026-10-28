@@ -603,47 +603,52 @@
         }
 
         function editData(id) {
-            const item = dbData.find(d => d.id === id);
-            if (!item) return;
+            // Ambil langsung dari Firebase jika dbData belum siap
+            dbRef.child(id).once('value').then((snapshot) => {
+                const item = snapshot.val();
+                if (!item) {
+                    alert('Data tidak ditemukan di database.');
+                    return;
+                }
 
-            document.getElementById('editId').value = item.id;
-            document.getElementById('petugas').value = item.petugas || '';
-            document.getElementById('waPetugas').value = item.waPetugas || '';
-            document.getElementById('namaMasjid').value = item.namaMasjid || '';
-            document.getElementById('jenisIbadah').value = item.jenisIbadah || 'Masjid';
-            document.getElementById('alamat').value = item.alamat || '';
-            document.getElementById('tahunBerdiri').value = item.tahunBerdiri !== '-' ? item.tahunBerdiri : '';
-            document.getElementById('koordinat').value = item.koordinat !== '-' ? item.koordinat : '';
-            
-            document.getElementById('statusTanah').value = item.statusTanah || 'Wakaf Bersertifikat';
-            document.getElementById('noSertifikat').value = item.noSertifikat !== '-' ? item.noSertifikat : '';
-            document.getElementById('luasTanah').value = item.luasTanah || '';
-            document.getElementById('luasBangunan').value = item.luasBangunan || '';
-            document.getElementById('ketuaDKM').value = item.ketuaDKM || '';
-            document.getElementById('waDKM').value = item.waDKM || '';
-            document.getElementById('jumlahPengurus').value = item.jumlahPengurus || '';
-            document.getElementById('statusIRMAS').value = item.statusIRMAS || 'Ada & Aktif';
+                document.getElementById('editId').value = item.id;
+                document.getElementById('petugas').value = item.petugas || '';
+                document.getElementById('waPetugas').value = item.waPetugas || '';
+                document.getElementById('namaMasjid').value = item.namaMasjid || '';
+                document.getElementById('jenisIbadah').value = item.jenisIbadah || 'Masjid';
+                document.getElementById('alamat').value = item.alamat || '';
+                document.getElementById('tahunBerdiri').value = item.tahunBerdiri !== '-' ? item.tahunBerdiri : '';
+                document.getElementById('koordinat').value = item.koordinat !== '-' ? item.koordinat : '';
+                
+                document.getElementById('statusTanah').value = item.statusTanah || 'Wakaf Bersertifikat';
+                document.getElementById('noSertifikat').value = item.noSertifikat !== '-' ? item.noSertifikat : '';
+                document.getElementById('luasTanah').value = item.luasTanah || '';
+                document.getElementById('luasBangunan').value = item.luasBangunan || '';
+                document.getElementById('ketuaDKM').value = item.ketuaDKM || '';
+                document.getElementById('waDKM').value = item.waDKM || '';
+                document.getElementById('jumlahPengurus').value = item.jumlahPengurus || '';
+                document.getElementById('statusIRMAS').value = item.statusIRMAS || 'Ada & Aktif';
 
-            document.getElementById('statusTPA').value = item.statusTPA || 'Ada (Aktif)';
-            document.getElementById('jumlahSantri').value = item.jumlahSantri || 0;
-            document.getElementById('jumlahGuru').value = item.jumlahGuru || 0;
-            document.getElementById('kapasitas').value = item.kapasitas || '';
-            document.getElementById('kondisiSound').value = item.kondisiSound || 'Sangat Baik & Jernih';
-            document.getElementById('kondisiSanitasi').value = item.kondisiSanitasi || 'Bersih & Sangat Layak';
-            
-            document.querySelectorAll('input[name="programRequired"]').forEach(cb => {
-                cb.checked = Array.isArray(item.programRequired) && item.programRequired.includes(cb.value);
+                document.getElementById('statusTPA').value = item.statusTPA || 'Ada (Aktif)';
+                document.getElementById('jumlahSantri').value = item.jumlahSantri || 0;
+                document.getElementById('jumlahGuru').value = item.jumlahGuru || 0;
+                document.getElementById('kapasitas').value = item.kapasitas || '';
+                document.getElementById('kondisiSound').value = item.kondisiSound || 'Sangat Baik & Jernih';
+                document.getElementById('kondisiSanitasi').value = item.kondisiSanitasi || 'Bersih & Sangat Layak';
+                
+                document.querySelectorAll('input[name="programRequired"]').forEach(cb => {
+                    cb.checked = Array.isArray(item.programRequired) && item.programRequired.includes(cb.value);
+                });
+
+                document.getElementById('catatan').value = item.catatan !== '-' ? item.catatan : '';
+
+                closePreviewDetailModal();
+                closeAllListModal();
+                currentStep = 1;
+                updateStepView();
+                window.scrollTo({ top: 400, behavior: 'smooth' });
+                alert('Data berhasil dimuat ke formulir. Silakan lakukan perubahan, lalu klik Simpan.');
             });
-
-            document.getElementById('catatan').value = item.catatan !== '-' ? item.catatan : '';
-
-            // Tutup modal dan arahkan kembali form ke Langkah 1 secara eksplisit
-            closePreviewDetailModal();
-            closeAllListModal();
-            currentStep = 1;
-            updateStepView();
-            window.scrollTo({ top: 400, behavior: 'smooth' });
-            alert('Data berhasil dimuat ke formulir. Silakan lakukan perubahan, lalu klik Simpan.');
         }
 
         function renderStatsAndList() {
@@ -705,7 +710,7 @@
             `;
 
             document.getElementById('btnEditData').setAttribute('onclick', `editData(${item.id})`);
-            document.getElementById('btnDeleteData').setAttribute('onclick`, `deleteData(${item.id})`);
+            document.getElementById('btnDeleteData').setAttribute('onclick', `deleteData(${item.id})`);
 
             document.getElementById('previewDetailModal').classList.remove('hidden');
         }
