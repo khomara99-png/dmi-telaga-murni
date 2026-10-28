@@ -10,6 +10,11 @@
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <!-- FontAwesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Firebase SDK (Compat Version) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -21,7 +26,7 @@
     <header class="bg-gradient-to-r from-emerald-800 via-emerald-700 to-teal-800 text-white shadow-lg sticky top-0 z-30">
         <div class="max-w-5xl mx-auto px-4 py-3 sm:px-6 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <!-- Logo Resmi DMI Base64 (Dijamin Tampil) -->
+                <!-- Logo Resmi DMI Base64 -->
                 <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center p-1 shadow-inner border border-white/20 shrink-0 overflow-hidden">
                     <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEAAQMAAABmvDolAAAABlBMVEUAAAD///+l2Z/dAAAAAXRSTlMAQObYZgAAAFBJREFUeJztwQEBAAAAgiD/r25IQAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC8G9EaAAGzU8WzAAAAAElFTkSuQmCC" alt="Logo DMI" class="w-full h-full object-contain" />
                 </div>
@@ -34,6 +39,11 @@
                 </div>
             </div>
             <div class="flex items-center gap-2">
+                <!-- Tombol Refresh Data -->
+                <button onclick="manualRefresh()" title="Sinkronkan / Muat Ulang Data" class="bg-emerald-700 hover:bg-emerald-600 text-white p-2.5 rounded-xl text-xs sm:text-sm font-bold shadow-md transition-all flex items-center gap-1.5 active:scale-95 border border-emerald-600">
+                    <i class="fa-solid fa-rotate" id="refreshIcon"></i>
+                    <span class="hidden sm:inline">Refresh</span>
+                </button>
                 <button onclick="exportToExcel()" class="bg-amber-400 hover:bg-amber-300 text-emerald-950 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold shadow-md transition-all flex items-center gap-2 active:scale-95 border border-amber-300">
                     <i class="fa-solid fa-file-excel text-base"></i>
                     <span class="hidden sm:inline">Excel</span>
@@ -44,7 +54,7 @@
 
     <main class="max-w-5xl mx-auto px-4 sm:px-6 mt-6 flex-grow w-full space-y-6">
 
-        <!-- Banner Informasi & Tombol Sinkronisasi Data -->
+        <!-- Banner Informasi & Status Sinkronisasi Real-time -->
         <div class="bg-emerald-900 text-white rounded-2xl p-5 shadow-xl relative overflow-hidden flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div class="absolute -right-10 -bottom-10 opacity-10 text-white text-9xl">🕌</div>
             <div class="relative z-10 max-w-xl">
@@ -56,14 +66,9 @@
                     Pendataan terpadu sarana tempat ibadah, legalitas wakaf, kondisi akustik/sanitasi, serta kegiatan TPA/TPQ di Desa Telaga Murni.
                 </p>
             </div>
-            <div class="relative z-10 flex flex-wrap gap-2 shrink-0">
-                <button onclick="backupData()" class="bg-emerald-800 hover:bg-emerald-700 text-white px-3 py-2 rounded-xl text-xs font-bold border border-emerald-600 flex items-center gap-1.5 shadow">
-                    <i class="fa-solid fa-download"></i> Backup Data PC
-                </button>
-                <label class="bg-emerald-800 hover:bg-emerald-700 text-white px-3 py-2 rounded-xl text-xs font-bold border border-emerald-600 flex items-center gap-1.5 shadow cursor-pointer">
-                    <i class="fa-solid fa-upload"></i> Restore ke HP
-                    <input type="file" id="importFile" accept=".json" onchange="restoreData(event)" class="hidden">
-                </label>
+            <div class="relative z-10 bg-emerald-950/60 border border-emerald-700/60 p-3 rounded-xl text-xs text-emerald-200 flex items-center gap-2 shrink-0">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+                <span>Database Terhubung Real-Time (PC & HP Sinkron)</span>
             </div>
         </div>
 
@@ -339,7 +344,7 @@
         <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 text-center space-y-4">
             <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center text-3xl mx-auto shadow-inner">✨</div>
             <h3 class="font-extrabold text-xl text-slate-800">Jazakallahu Khairan!</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">Data rumah ibadah telah berhasil terdaftar dalam sistem DMI Ranting Desa Telaga Murni. Terima kasih atas partisipasi aktif Anda.</p>
+            <p class="text-xs text-slate-600 leading-relaxed">Data rumah ibadah telah berhasil disimpan ke Database Cloud DMI. Data otomatis tersinkron ke PC dan HP.</p>
             <button onclick="closeSuccessModal()" class="w-full py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs rounded-xl shadow-md">Tutup & Tambah Data Lagi</button>
         </div>
     </div>
@@ -371,51 +376,59 @@
         </div>
     </div>
 
-    <!-- SCRIPT -->
+    <!-- SCRIPT FIREBASE & APLIKASI -->
     <script>
-        let dbData = JSON.parse(localStorage.getItem('dmi_telaga_murni_data')) || [];
+        // Konfigurasi Firebase Anda
+        const firebaseConfig = {
+            apiKey: "AIzaSyB93Jyj7wbyz02uG3RO2EiZEH08140Vsqk",
+            authDomain: "dmi-telaga-murni.firebaseapp.com",
+            databaseURL: "https://dmi-telaga-murni-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "dmi-telaga-murni",
+            storageBucket: "dmi-telaga-murni.firebasestorage.app",
+            messagingSenderId: "476356263004",
+            appId: "1:476356263004:web:4cb0e7ebc5a8ed89d03a99",
+            measurementId: "G-KY47YZD1BT"
+        };
+
+        // Inisialisasi Firebase
+        firebase.initializeApp(firebaseConfig);
+        const dbRef = firebase.database().ref('dmi_telaga_murni_data');
+
+        let dbData = [];
         let currentStep = 1;
 
+        // Ambil data secara Real-Time dari Firebase
         window.addEventListener('DOMContentLoaded', () => {
-            renderStatsAndList();
+            dbRef.on('value', (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    dbData = Object.values(data).reverse();
+                } else {
+                    dbData = [];
+                }
+                renderStatsAndList();
+            });
         });
 
-        // Fitur Sinkronisasi (Backup dari PC ke file JSON)
-        function backupData() {
-            if (dbData.length === 0) {
-                alert('Belum ada data untuk dibackup!');
-                return;
-            }
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(dbData, null, 2));
-            const downloadAnchor = document.createElement('a');
-            downloadAnchor.setAttribute("href", dataStr);
-            downloadAnchor.setAttribute("download", "backup_dmi_telaga_murni.json");
-            document.body.appendChild(downloadAnchor);
-            downloadAnchor.click();
-            downloadAnchor.remove();
-        }
-
-        // Fitur Sinkronisasi (Restore ke HP dari file JSON)
-        function restoreData(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const importedData = JSON.parse(e.target.result);
-                    if (Array.isArray(importedData)) {
-                        dbData = importedData;
-                        localStorage.setItem('dmi_telaga_murni_data', JSON.stringify(dbData));
-                        renderStatsAndList();
-                        alert('Berhasil memuat data ke perangkat ini!');
-                    } else {
-                        alert('Format file backup tidak valid.');
-                    }
-                } catch (err) {
-                    alert('Gagal membaca file JSON.');
+        // Fitur Tombol Refresh Manual
+        function manualRefresh() {
+            const icon = document.getElementById('refreshIcon');
+            icon.classList.add('fa-spin');
+            dbRef.once('value').then((snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    dbData = Object.values(data).reverse();
+                } else {
+                    dbData = [];
                 }
-            };
-            reader.readAsText(file);
+                renderStatsAndList();
+                setTimeout(() => {
+                    icon.classList.remove('fa-spin');
+                }, 500);
+            }).catch(err => {
+                icon.classList.remove('fa-spin');
+                alert('Gagal menyinkronkan data. Periksa koneksi internet Anda.');
+            });
         }
 
         function toggleTPQInput() {
@@ -526,8 +539,9 @@
 
         function confirmSubmit() {
             const programs = Array.from(document.querySelectorAll('input[name="programRequired"]:checked')).map(cb => cb.value);
+            const uniqueId = Date.now();
             const newData = {
-                id: Date.now(),
+                id: uniqueId,
                 petugas: document.getElementById('petugas').value,
                 waPetugas: document.getElementById('waPetugas').value,
                 namaMasjid: document.getElementById('namaMasjid').value,
@@ -554,15 +568,16 @@
                 tanggal: new Date().toISOString().split('T')[0]
             };
 
-            dbData.unshift(newData);
-            localStorage.setItem('dmi_telaga_murni_data', JSON.stringify(dbData));
-
-            closeReviewModal();
-            document.getElementById('dmiForm').reset();
-            currentStep = 1;
-            updateStepView();
-            renderStatsAndList();
-            document.getElementById('successModal').classList.remove('hidden');
+            // Simpan ke Firebase Realtime Database
+            dbRef.child(uniqueId).set(newData).then(() => {
+                closeReviewModal();
+                document.getElementById('dmiForm').reset();
+                currentStep = 1;
+                updateStepView();
+                document.getElementById('successModal').classList.remove('hidden');
+            }).catch(error => {
+                alert('Gagal menyimpan data ke database: ' + error.message);
+            });
         }
 
         function closeSuccessModal() {
@@ -583,7 +598,7 @@
 
             const daftarList = document.getElementById('daftarList');
             if (dbData.length === 0) {
-                daftarList.innerHTML = `<p class="text-xs text-slate-400 col-span-2 text-center py-6">Belum ada data rumah ibadah yang terdaftar. Silakan isi formulir di bawah untuk memulai.</p>`;
+                daftarList.innerHTML = `<p class="text-xs text-slate-400 col-span-2 text-center py-6">Belum ada data rumah ibadah yang terdaftar.</p>`;
                 return;
             }
 
