@@ -317,7 +317,7 @@
                     <button type="button" id="btnPrev" onclick="changeStep(-1)" class="hidden px-5 py-2.5 rounded-xl border border-slate-300 text-slate-600 font-bold text-xs hover:bg-slate-50 active:scale-95 transition-all">← Kembali</button>
                     <div class="ml-auto flex items-center gap-2">
                         <button type="button" id="btnNext" onclick="changeStep(1)" class="bg-emerald-700 hover:bg-emerald-800 text-white px-6 py-2.5 rounded-xl font-bold text-xs shadow-md active:scale-95 transition-all">Lanjut →</button>
-                        <button type="submit" id="btnSubmit" class="hidden bg-amber-500 hover:bg-amber-400 text-emerald-950 px-6 py-2.5 rounded-xl font-extrabold text-xs shadow-md active:scale-95 transition-all border border-amber-300">Simpan & Kirim Data 🚀</button>
+                        <button type="submit" id="btnSubmit" class="hidden bg-amber-500 hover:bg-amber-400 text-emerald-950 px-6 py-2.5 rounded-xl font-extrabold text-xs shadow-md active:scale-95 transition-all border border-amber-300">Simpan Perubahan 🚀</button>
                     </div>
                 </div>
             </form>
@@ -334,7 +334,7 @@
             <div id="reviewContent" class="p-5 overflow-y-auto space-y-3 text-xs text-slate-700"></div>
             <div class="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-end gap-2">
                 <button onclick="closeReviewModal()" class="px-4 py-2 rounded-xl border border-slate-300 font-bold text-xs text-slate-600">Batal / Edit</button>
-                <button onclick="confirmSubmit()" class="px-5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs shadow">Ya, Simpan Data</button>
+                <button onclick="confirmSubmit()" class="px-5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs shadow">Ya, Simpan Perubahan</button>
             </div>
         </div>
     </div>
@@ -343,7 +343,7 @@
         <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 text-center space-y-4">
             <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center text-3xl mx-auto shadow-inner">✨</div>
             <h3 class="font-extrabold text-xl text-slate-800">Jazakallahu Khairan!</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">Data rumah ibadah telah berhasil disimpan ke Database Cloud DMI. Data otomatis tersinkron ke PC dan HP.</p>
+            <p class="text-xs text-slate-600 leading-relaxed">Data rumah ibadah telah berhasil diperbarui di Database Cloud DMI.</p>
             <button onclick="closeSuccessModal()" class="w-full py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs rounded-xl shadow-md">Tutup</button>
         </div>
     </div>
@@ -637,12 +637,13 @@
 
             document.getElementById('catatan').value = item.catatan !== '-' ? item.catatan : '';
 
+            // Tutup modal dan arahkan kembali form ke Langkah 1 secara eksplisit
             closePreviewDetailModal();
             closeAllListModal();
             currentStep = 1;
             updateStepView();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            alert('Silakan sesuaikan data pada formulir, lalu klik Simpan.');
+            window.scrollTo({ top: 400, behavior: 'smooth' });
+            alert('Data berhasil dimuat ke formulir. Silakan lakukan perubahan, lalu klik Simpan.');
         }
 
         function renderStatsAndList() {
@@ -704,7 +705,7 @@
             `;
 
             document.getElementById('btnEditData').setAttribute('onclick', `editData(${item.id})`);
-            document.getElementById('btnDeleteData').setAttribute('onclick', `deleteData(${item.id})`);
+            document.getElementById('btnDeleteData').setAttribute('onclick`, `deleteData(${item.id})`);
 
             document.getElementById('previewDetailModal').classList.remove('hidden');
         }
